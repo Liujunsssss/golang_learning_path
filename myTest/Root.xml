@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+		<domain>pppp.ccc</domain>
+		<domain_id>1</domain_id>
+		<origin_host>kkkk</origin_host>
+		<special_configs>
+				<cache_rules>
+						<rules>
+								<rule>
+										<url_patton>ssss</url_patton>
+								</rule>
+								<omitempty xmlns="rule&gt;httpcode,">1</omitempty>
+								<omitempty xmlns="rule&gt;ttl,">2</omitempty>
+								<omitempty xmlns="rule&gt;ignore-cache-control,">3</omitempty>
+						</rules>
+						<rules>
+								<rule>
+										<url_patton>qqqqqqqqqqqqqqqq</url_patton>
+								</rule>
+								<omitempty xmlns="rule&gt;httpcode,">800</omitempty>
+								<omitempty xmlns="rule&gt;ttl,">900</omitempty>
+								<omitempty xmlns="rule&gt;ignore-cache-control,">100</omitempty>
+						</rules>
+						<enable>1</enable>
+				</cache_rules>
+				<cache_key>
+						<rules>
+								<rule>
+										<patton>pppp</patton>
+										<key>llll</key>
+								</rule>
+						</rules>
+						<rules>
+								<rule>
+										<patton>pppp</patton>
+										<key>llll</key>
+								</rule>
+						</rules>
+						<enable>1</enable>
+						<patton>iiiiii</patton>
+				</cache_key>
+				<refer>
+						<enable>5</enable>
+						<allownullreferer>10</allownullreferer>
+						<valid_list>rrr</valid_list>
+						<valid_list>tttt</valid_list>
+				</refer>
+				<ipcontrol>
+						<enable>2</enable>
+						<invalid_list>aaaaa</invalid_list>
+						<invalid_list>eeee</invalid_list>
+				</ipcontrol>
+				<host_forcache>mmmmmmmmmmmmmmmmm</host_forcache>
+				<header_writer>
+						<enable>800</enable>
+						<omitempty xmlns="client_rsp_set,">lll</omitempty>
+						<origin_req_set>pppp</origin_req_set>
+				</header_writer>
+				<regex_rules>
+						<Rule>gggggggggggggggg</Rule>
+				</regex_rules>
+		</special_configs>
+</root>
