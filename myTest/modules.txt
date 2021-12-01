@@ -1,9 +1,3 @@
 # github.com/go-sql-driver/mysql v1.6.0
 ## explicit
 github.com/go-sql-driver/mysql
-
-
-1、部署配置系统整套测试环境
-2、配置系统和前端联调
-3、获取按月带宽数据接口修改
-4、设置域名umon带宽告警接口完成

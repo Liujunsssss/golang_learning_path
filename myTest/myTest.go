@@ -6,9 +6,6 @@ import (
 	"strings"
 )
 
-
-curl -vo /dev/null "https://looper015.ucloud.com.cn/conf_agent_redis_1.2.5.10.tar.gz" --resolve "looper015.ucloud.com.cn:443:${1.31.130.65}"
-
 func GetLocalIP() (ip string, err error) {
 	ip = "127.0.0.1"
 	conn, err := net.Dial("udp", "8.8.8.8:80")
@@ -68,7 +65,7 @@ func main() {
 func main() {
 	for {
 		begin := time.Now().Unix()
-		host := "http://conf-server.ucloudnaming.com:9999/"
+		host := ""
 		ConfirmVersionInfoList := make([]map[string]interface{}, 0)
 		reqData := map[string]interface{}{
 			"Action":                 "ReportVersion",
@@ -130,30 +127,6 @@ func SimpleHttpPostRequestWitchTimeout(url string, bodyType string, body io.Read
 	defer resp.Body.Close()
 	res, err = ioutil.ReadAll(resp.Body)
 	return
-}
-
-/*
-func getSignature(params map[string]interface{}) string {
-	urlValues := url.Values{}
-	for k, v := range params {
-		urlValues.Set(k, v.(string))
-	}
-	cred := &auth.Credential{
-		PublicKey:  "H6IfjPpzXlI89GZPTSRtae1mDleW8XBIHLpsZTj9I",
-		PrivateKey: "EJWlnSppNUtL5EezekLJ728xhDWolli1D9sHWgPPSVZwFTe211m9JaK6PPJkwYcjMp",
-	}
-	v := cred.CreateSign(urlValues.Encode())
-	return v
-}
-
-func main() {
-	val := map[string]interface{}{
-		"Action":              "AddCertificate",
-		"CertName":            "ucloud",
-		"top_organization_id": 56032177,
-		"organization_id":     63865029,
-	}
-	fmt.Println(getSignature(val))
 }
 
 /*
@@ -1089,7 +1062,7 @@ func main() {
 /*
 func main() {
 	for i := 0; i < 100; i++ {
-		url := "http://monitor.static01.ucloud.com.cn/ucloud.123123"
+		url := ""
 		_, err := GetRequestTool(url, "11-22-333")
 		if err != nil {
 			fmt.Println(err)
@@ -1365,13 +1338,13 @@ func main() {
 
 /*
 func main() {
-	DM5 := fmt.Sprintf("%x", md5.Sum([]byte("txmov2.a.yximgs.comtxmov2.a.yximgs.comtxmov2.a.yximgs.com")))
+	DM5 := fmt.Sprintf("%x", md5.Sum([]byte(")))
 	fmt.Println(DM5)
 }
 
 /*
 func main() {
-	var arr []string = []string{"txmov2.a.yximgs.com", "txmov2.a.yximgs.com", "txmov2.a.yximgs.com"}
+	var arr []string = []string{""}
 	hmd := md5.New()
 	for _, v := range arr {
 		io.WriteString(hmd, v)
@@ -1455,30 +1428,7 @@ func main() {
 
 /*
 func main() {
-	new := `server {
-	listen 443 ssl;
-	listen [::]:443 ssl;
-	server_name note.dmgc.us;
-
-	ssl_certificate certs/note.dmgc.us.crt;
-	ssl_certificate_key certs/note.dmgc.us.key;
-
-	ssl_dhparam /usr/local/nginx/conf/dhparam.pem;
-	ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
-	ssl_prefer_server_ciphers  on;
-
-	set $real_uri $uri;
-	location / {
-		more_set_headers "Server: $upstream_http_server";
-		proxy_set_header  X-Real-IP  $remote_addr;
-		proxy_set_header Host "note.dmgc.us";
-		proxy_set_header X-Protocol https;
-		proxy_http_version 1.1;
-		proxy_buffering off;
-		proxy_pass http://http_backend;
-	}
-
-}`
+	new := ``
 	new = strings.Replace(new, " ", "", -1)
 	new = strings.Replace(new, "\n", "", -1)
 	new = strings.Replace(new, "\t", "", -1)
@@ -1903,131 +1853,6 @@ func DeletePreAndSufSpace(str string) string {
 
 	return string(strList[:count-spaceCount])
 }
-func main() {
-	fmt.Println(getValueByKeyFromConf("origin_with_host", "origin_with_host   =  dasjdjasj   \n dasjdjasj =origin_with_host"))
-}
-
-/*
-func CloseHttpsNginxOperation(xmlL1Nginx string) (NginxConfL1 string) {
-	if find := strings.Contains(xmlL1Nginx, "ssl_protocols"); !find {
-		NginxConfL1 = xmlL1Nginx
-		return
-	}
-	nginx_arr := make([]string, 0)
-	for {
-		server_first := strings.Index(xmlL1Nginx, "server {")
-		if server_first < 0 {
-			break
-		}
-		server_second := strings.Index(xmlL1Nginx[server_first+1:], "server {")
-		if server_second < 0 {
-			nginx_arr = append(nginx_arr, xmlL1Nginx[server_first:])
-			xmlL1Nginx = ""
-		} else {
-			nginx_arr = append(nginx_arr, xmlL1Nginx[server_first:server_second+1])
-			xmlL1Nginx = xmlL1Nginx[server_second+1:]
-		}
-	}
-	for i := 0; i < len(nginx_arr); i++ {
-		if find := strings.Contains(nginx_arr[i], "ssl_protocols"); find {
-			nginx_arr = append(nginx_arr[:i], nginx_arr[i+1:]...)
-		}
-	}
-	for _, v := range nginx_arr {
-		NginxConfL1 += v + "\n"
-	}
-	return
-}
-func main() {
-	s := `server {
-		listen       443 ssl;
-		listen  [::]:443 ssl;
-		server_name  {domain_template};
-
-		ssl_certificate      certs/{domain_template}.crt;
-		ssl_certificate_key  certs/{domain_template}.key;
-
-		ssl_dhparam /usr/local/nginx/conf/dhparam.pem;
-		ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
-		ssl_ciphers  'TLS13-AES-256-GCM-SHA384:TLS13-CHACHA20-POLY1305-SHA256:TLS13-AES-128-GCM-SHA256:TLS13-AES-128-CCM-8-SHA256:TLS13-AES-128-CCM-SHA256:EECDH+AESGCM:EDH+AESGCM:AES128+EECDH:AES128+EDH:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4';
-		ssl_prefer_server_ciphers  on;
-
-		set $real_uri $uri;
-		location / {
-			more_set_headers "Server: $upstream_http_server";
-			proxy_set_header  X-Real-IP  $remote_addr;
-			proxy_set_header  X-Forwarded-For  $remote_addr;
-			proxy_set_header Host "{domain_template}";
-			proxy_set_header X-Protocol https;
-			proxy_http_version 1.1;
-			proxy_buffering off;
-			proxy_pass http://http_backend;
-		}
-
-	}
-	server {
-			listen       80;
-			server_name  {domain_template};
-
-			gzip  on;
-			gzip_min_length 1k;
-			gzip_buffers 4 16k;
-			gzip_comp_level 2;
-			gzip_types text/plain text/css text/javascript text/xml application/x-javascript application/json application/xml application/xml+rss application/javascript model/vnd.collada+xml;
-			gzip_vary on;
-			gzip_disable "MSIE [1-6]\.";
-			gzip_http_version 1.0;
-			location /nginx-vts-status-0528 {
-					vhost_traffic_status_display;
-					vhost_traffic_status_display_format json;
-					allow 127.0.0.1;
-					deny all;
-			}
-
-			location / {
-					proxy_set_header X-Real-Port $remote_port;
-					proxy_set_header X-Connection $connection;
-					if ($request_method !~ "GET|HEAD|POST|PURGE|FETCH|QFETCH|OPTIONS") {
-							return 403;
-					}
-					proxy_set_header  X-Real-IP  $remote_addr;
-					proxy_set_header Host $host;
-					proxy_buffering off;
-					proxy_http_version 1.1;
-					proxy_set_header Connection "";
-					proxy_pass   http://http_backend;
-			}
-	}
-	server {
-		listen       443 ssl;
-		listen  [::]:443 ssl;
-		server_name  {domain_template};
-
-		ssl_certificate      certs/{domain_template}.crt;
-		ssl_certificate_key  certs/{domain_template}.key;
-
-		ssl_dhparam /usr/local/nginx/conf/dhparam.pem;
-		ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
-		ssl_ciphers  'TLS13-AES-256-GCM-SHA384:TLS13-CHACHA20-POLY1305-SHA256:TLS13-AES-128-GCM-SHA256:TLS13-AES-128-CCM-8-SHA256:TLS13-AES-128-CCM-SHA256:EECDH+AESGCM:EDH+AESGCM:AES128+EECDH:AES128+EDH:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4';
-		ssl_prefer_server_ciphers  on;
-
-		set $real_uri $uri;
-		location / {
-			more_set_headers "Server: $upstream_http_server";
-			proxy_set_header  X-Real-IP  $remote_addr;
-			proxy_set_header  X-Forwarded-For  $remote_addr;
-			proxy_set_header Host "{domain_template}";
-			proxy_set_header X-Protocol https;
-			proxy_http_version 1.1;
-			proxy_buffering off;
-			proxy_pass http://http_backend;
-		}
-
-	}
-	`
-	fmt.Println(CloseHttpsNginxOperation(s))
-}
-
 /*
 func main() {
 	var path = "./looper"
@@ -3181,11 +3006,6 @@ func main() {
 }
 
 /*
-func main() {
-	re, _ := http.Get("https://uxiao.ucloudadmin.com/?ticket=ST-1827508-v1iz8a1-VMLriWRbKU7h9vzH5uUlocalhost#/api-manager/sections")
-	body, _ := ioutil.ReadAll(re.Body)
-	fmt.Println(string(body))
-}
 
 /*
 var cpuprofile = flag.String("cpuprofile", "", "write cpu profile to file")
@@ -3264,24 +3084,6 @@ func main() {
 	fmt.Println(len(provlist))
 }
 /*
-http://api.ucloudadmin.com/?Action=GetUcdnMonthlyBandwidth&TopOrganizationId=56012663&ChargeMonth=1617206400&DomainIds.0=ucdn-g35hz4uf&DomainIds.0=ucdn-2qpotk2h&Area=cn&DataType=0
-TopOrganizationId int 必传
-OrganizationId  int 项目id，可选，不传查询整个公司id下的数据
-DomainIds  []string 域名id，可选， 不传则查询整个账户或整个公司id下的域名（DomainIds.0=oooo&DomainIds.1=pppp)
-ChargeMonth int64 月份时间戳，必传， 时间戳只要是某个月的时间戳就返回某个月的数据，例如传1615132800， 就查询整个三月份的数据
-Area string 区域， 可选， 国内（cn）、国外（abroad）、全部区域不传或者（all）
-DataType int 获取数据类型，0（概要数据） 不等于0（原始数据）
-/*
-func main() {
-	mapOrderDetail := []map[string]interface{}{{"ProductId": 200007, "Multiple": 444444.444}}
-	mapBodyData := map[string]interface{}{"Action": "GetBuyPrice", "Backend": "UBill", "TopOrganizationId:": 7777, "OrganizationId": 777777, "ProductType:": 7, "RegionId": 1, "ChargeType": 102, "Quantity": 1, "Count": 1, "OrderDetail": mapOrderDetail, "Channel": 0}
-
-	jsonStr, err := json.Marshal(mapBodyData)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(string(jsonStr))
-}
 
 /*
 func main() {
@@ -4481,7 +4283,7 @@ func main(){
 		"m":"8",
 	}
 	p,_:=json.Marshal(c)
-	list :=`curl -d '`+string(p)+`' http://172.18.181.2:8001/api/v3/statistics/aggregations`;
+	list :=`curl -d '`+string(p)+``;
 
 	fmt.Println(list)
 }
